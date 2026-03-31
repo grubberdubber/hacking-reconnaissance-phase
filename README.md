@@ -59,16 +59,4 @@ feroxbuster -u https://cgi-lib.berkeley.edu/ \
 
   dnsrecon
 
-  while IFS= read -r d; do
-    d=$(echo "$d" | tr -d '\r')
-
-    echo "[*] Analizando: $d" | tee -a dnsrecon.txt
-
-    dnsrecon -d "$d" \
-    -t std,axfr,zonewalk,snoop,rvl \
-    -D /usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt \
-    -s --threads 50 --disable_check_bindversion -v \
-    2>&1 | tee -a dnsrecon.txt
-
-done < subfinder.txt
-
+while IFS= read -r d; do d=$(echo "$d" | tr -d '\r'); echo "[*] Analizando: $d" | tee -a dnsrecon.txt; dnsrecon -d "$d" -t std,axfr,zonewalk,snoop,rvl -D /usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt -s --threads 50 --disable_check_bindversion -v 2>&1 | tee -a dnsrecon.txt; done < subfindercl.txt
