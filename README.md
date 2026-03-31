@@ -59,10 +59,8 @@ feroxbuster -u https://cgi-lib.berkeley.edu/ \
 
   dnsrecon
 
-  for d in $(cat subfindercl.txt); do 
+  for d in $(cat subfinder.txt); do 
     echo -e "\n[*] Analizando: $d" | tee -a dnsrecon.txt
-    # Agregamos -z (zonewalk) y -s (SPF lookup) a los que ya teníamos
-    dnsrecon -d "$d" -t std,axfr,rvl,zonewalk -s --threads 50 --disable_check_bindversion -v | grep -vE "Could not resolve|Error:" | tee -a dnsrecon.txt
+    dnsrecon -d "$d" -t std,axfr,rvl,zonewalk,snoop -D /usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt -s --threads 50 --disable_check_bindversion -v | tee -a dnsrecon.txt
 done
-  -o feroxbuster.txt
 
