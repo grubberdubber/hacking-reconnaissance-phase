@@ -41,7 +41,7 @@ sudo katana -u https://DOMAIN.com/ \
 
 feroxbuster
 
-´feroxbuster -u https://cgi-lib.berkeley.edu/ \           
+#feroxbuster -u https://cgi-lib.berkeley.edu/ \           
   -w /usr/share/seclists/Discovery/Web-Content/raft-large-files.txt \
   -t 100 \
   -x php,html,js,txt,conf,bak,old,zip,sql,env \
@@ -55,7 +55,7 @@ feroxbuster
   --collect-words \
   --collect-extensions \
   -k \
-  -A \´
+  -A \#
 
   dnsrecon
 
