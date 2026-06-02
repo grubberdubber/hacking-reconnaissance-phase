@@ -132,21 +132,7 @@ sudo katana -u https://DOMAIN.com/ \
 
 ```bash
 # Feroxbuster: Crawling y fuerza bruta exhaustiva con recursividad y extracción de backups
-feroxbuster -u https://cgi-lib.berkeley.edu/ \
-  -w /usr/share/seclists/Discovery/Web-Content/raft-large-files.txt \
-  -t 100 \
-  -x php,html,js,txt,conf,bak,old,zip,sql,env \
-  -C 404 \
-  -r \
-  --depth 3 \
-  --no-state \
-  --smart \
-  --thorough \
-  --collect-backups \
-  --collect-words \
-  --collect-extensions \
-  -k \
-  -A
+feroxbuster -u https://DOMAIN.com/ -w /usr/share/seclists/Discovery/Web-Content/raft-large-files.txt -t 100 -x php,html,js,txt,conf,bak,old,zip,sql,env -C 404 -r --depth 3 --no-state --smart --thorough --collect-backups --collect-words --collect-extensions -k -A -o feroxbuster.txt
 
 # Ffuf: Auto-calibración (bypass WAFs/403/429) enviado por proxy local (Burp)
 ffuf -w /usr/share/seclists/Discovery/Web-Content/raft-large-directories.txt:FUZZ -u https://DOMAIN.com/FUZZ -ac -recursion -recursion-depth 3 -x http://127.0.0.1:8080 -t 100 -o ffuf_results.json
